@@ -92,6 +92,3 @@ This is a simple Python application for managing an ice cream parlor cafe using 
     curl http://127.0.0.1:5000/allergens
     ```
 
-## License
-
-This project is licensed under the MIT License.
