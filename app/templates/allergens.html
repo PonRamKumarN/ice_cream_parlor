@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allergens</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/flavors">Flavors</a>
+        <a href="/cart">Cart</a>
+        <a href="/allergens">Allergens</a>
+        <a href="/inventory">Ingredients</a>
+    </div>
+    <div class="content">
+        <h1>Allergens</h1>
+        <ul>
+            {% for allergen in allergens %}
+            <li>{{ allergen['name'] }}</li>
+            {% endfor %}
+        </ul>
+        <form action="/allergens/add" method="post">
+            <label>Allergen Name:</label><br>
+            <input type="text" name="name" required><br><br>
+            <input type="submit" value="Add Allergen">
+        </form>
+    </div>
+</body>
+</html>

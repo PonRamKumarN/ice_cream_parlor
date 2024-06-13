@@ -1,0 +1,7 @@
+*.pyc
+__pycache__/
+instance/
+.python-eggs
+ice_cream_parlor.db
+
+

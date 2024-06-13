@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flavors</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/flavors">Flavors</a>
+        <a href="/cart">Cart</a>
+        <a href="/allergens">Allergens</a>
+        <a href="/inventory">Ingredients</a>
+    </div>
+    <div class="content">
+        <h1>Seasonal Flavors</h1>
+        <ul>
+            {% for flavor in flavors %}
+            <li>{{ flavor['name'] }} - {{ flavor['description'] }}</li>
+            {% endfor %}
+        </ul>
+        <form action="/flavors/add" method="post">
+            <label>Name:</label><br>
+            <input type="text" name="name" required><br>
+            <label>Description:</label><br>
+            <textarea name="description" rows="3" required></textarea><br>
+            <label>Availability:</label><br>
+            <input type="text" name="availability" required><br><br>
+            <input type="submit" value="Add Flavor">
+        </form>
+    </div>
+</body>
+</html>

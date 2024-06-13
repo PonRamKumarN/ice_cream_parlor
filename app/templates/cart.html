@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const flavorInput = document.getElementById("flavor-input");
+            flavorInput.addEventListener("input", function() {
+                const query = flavorInput.value;
+                console.log(`Query: ${query}`); // Debugging statement
+                fetch(`/search_flavors?query=${query}`)
+                    .then(response => {
+                        console.log(response); // Debugging statement
+                        return response.json()
+                    })
+                    .then(data => {
+                        console.log(data); // Debugging statement
+                        const datalist = document.getElementById("flavor-options");
+                        datalist.innerHTML = "";
+                        data.forEach(flavor => {
+                            const option = document.createElement("option");
+                            option.value = flavor.name;
+                            datalist.appendChild(option);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching flavors:', error); // Debugging statement
+                    });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/flavors">Flavors</a>
+        <a href="/cart">Cart</a>
+        <a href="/allergens">Allergens</a>
+        <a href="/inventory">Ingredients</a>
+    </div>
+    <div class="content">
+        <h1>Shopping Cart</h1>
+        <ul>
+            <h2> favourite</h2>
+            {% for item in cart %}
+            <li>{{ item['product_name'] }}</li>
+            {% endfor %}
+        </ul>
+        <form action="/cart/add" method="post">
+            <label>Product Name:</label><br>
+            <input type="text" id="flavor-input" name="product_name" list="flavor-options" required>
+            <datalist id="flavor-options"></datalist><br><br>
+            <input type="submit" value="Add to Cart">
+        </form>
+    </div>
+</body>
+</html>

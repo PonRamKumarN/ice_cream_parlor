@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Ingredient Inventory</title>
+</head>
+<body><div class="navbar">
+    <a href="/">Home</a>
+    <a href="/flavors">Flavors</a>
+    <a href="/cart">Cart</a>
+    <a href="/allergens">Allergens</a>
+    <a href="/inventory">Ingredients</a>
+</div>
+    <h1>Ingredient Inventory</h1>
+    <ul>
+        {% for Ingredient in inventory %}
+        <li>{{ Ingredient['name'] }}</li>
+        {% endfor %}
+    </ul>
+    <h2>Add New Ingredient</h2>
+    <form method="POST" action="{{ url_for('inventory') }}">
+        <label>Name:</label><br>
+        <input type="text" name="name"><br>
+        
+        <button type="submit">Add Ingredient</button>
+    </form>
+</body>
+</html>
